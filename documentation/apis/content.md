@@ -150,9 +150,26 @@ quill.setText('Hello\n');
 
 ## updateContents
 
+将Delta应用于编辑器的内容，返回一个改变后的Delta对象。如果这个Delta通过没有无效的操作，那么这些Deltas将是相同的。操作来源可能为：‘user’、‘api’或者‘silent’。当编辑器被禁用时，来源‘user’将被忽略。
 
+**Methods**
 
+```
+updateContents(delta: Delta, source: String = 'api'): Delta
+```
 
+**Examples**
 
-
-
+```
+// 假设编辑器当前包含 [{ insert: 'Hello World!' }]
+quill.updateContents(new Delta()
+  .retain(6)                  // Keep 'Hello '
+  .delete(5)                  // 'World' is deleted
+  .insert('Quill')
+  .retain(1, { bold: true })  // 将粗体应用于感叹号
+});
+// 编辑器现在应该是 [
+//  { insert: 'Hello Quill' },
+//  { insert: '!', attributes: { bold: true} }
+// ]
+```
