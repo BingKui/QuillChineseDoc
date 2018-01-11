@@ -18,4 +18,13 @@
   * 模块（Modules）
   * 主题（Themes）
 * [指南（Guides）](zhi-nan-ff08-guides.md)
+  * 为什么要用Quill？（Why Quill）
+  * [怎么自定义Quill](guides/howtocustomizequill.md)
+  * 将Quill添加到你的构建系统
+  * 构建自定义模块
+  * [通过Parchment克隆Medium](guides/clonewithparchment.md)
+  * [设计Delta的格式](guides/she-ji-delta-de-ge-shi.md)
+  * 与其他富文本编辑器对比
+  * 升级到1.0
+* 其他相关库（Other）
 
