@@ -16,12 +16,12 @@
     * [extension](documentation/api/extension.md)
   * [Delta](documentation/delta.md)
   * 模块（Modules）
-    * 工具栏（Toolbar）
-    * 键盘（Keyboard）
-    * 历史（History）
-    * 剪贴板（Clipboard）
-    * 格式化（Formula）
-    * 语法高亮（Syntax Highlighter）
+    * [工具栏（Toolbar）](documentation/modules/toolbar.md)
+    * [键盘（Keyboard）](documentation/modules/keyboard.md)
+    * [历史（History）](documentation/modules/history.md)
+    * [剪贴板（Clipboard）](documentation/modules/clipboard.md)
+    * [格式化（Formula）](documentation/modules/formula.md)
+    * [语法高亮（Syntax Highlighter）](documentation/modules/syntaxhighlighter.md)
   * [主题（Themes）](documentation/zhu-ti-ff08-themes.md)
 * [指南（Guides）](zhi-nan-ff08-guides.md)
   * [为什么要用Quill？（Why Quill）](guides/wei-shi-yao-yao-yong-quill-why-quill.md)
