@@ -21,6 +21,8 @@
 * 完成api-events全部翻译
 * 完成api-model
 * 完成api-extension
-
+* 调整目录结构
+* 新增modules文件夹，新建相应模块文件
+* 菜单关联
 
 
