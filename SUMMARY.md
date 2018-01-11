@@ -16,7 +16,13 @@
     * [extension](documentation/api/extension.md)
   * [Delta](documentation/delta.md)
   * 模块（Modules）
-  * 主题（Themes）
+    * 工具栏（Toolbar）
+    * 键盘（Keyboard）
+    * 历史（History）
+    * 剪贴板（Clipboard）
+    * 格式化（Formula）
+    * 语法高亮（Syntax Highlighter）
+  * [主题（Themes）](documentation/zhu-ti-ff08-themes.md)
 * [指南（Guides）](zhi-nan-ff08-guides.md)
   * [为什么要用Quill？（Why Quill）](guides/wei-shi-yao-yao-yong-quill-why-quill.md)
   * [怎么自定义Quill](guides/howtocustomizequill.md)
