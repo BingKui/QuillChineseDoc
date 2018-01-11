@@ -24,5 +24,7 @@
 * 调整目录结构
 * 新增modules文件夹，新建相应模块文件
 * 菜单关联
+* 完成history module
+* 完成toolbar module部分翻译
 
 
