@@ -110,7 +110,7 @@ class Blot {
 
 ## Example
 
-表示链接的Blot实现，该链接是父级，内联范围和格式表。 
+表示链接的Blot实现，该链接是父级，内联范围和格式表。
 
 ```
 import Parchment from 'parchment';
@@ -205,7 +205,7 @@ let imageNode = document.createElement('img');
 
 Width.add(imageNode, '10px');
 console.log(imageNode.outerHTML);   // Will print <img width="10px">
-Width.value(imageNode);	                // Will return 10px
+Width.value(imageNode);                    // Will return 10px
 Width.remove(imageNode);
 console.log(imageNode.outerHTML);   // Will print <img>
 ```
@@ -269,5 +269,6 @@ query(attributorName: string, scope: Scope = Scope.ANY): Attributor;
 // 注册Blot类定义或Attributor实例
 register(BlotClass | Attributor);
 ```
+
 
 
