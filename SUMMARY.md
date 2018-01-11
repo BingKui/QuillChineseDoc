@@ -28,4 +28,5 @@
   * [升级到1.0](guides/sheng-ji-dao-1-0.md)
 * [其他相关库（Other）](qi-ta-xiang-guan-ku-ff08-other.md)
   * [Parchment](other/parchment.md)
+* [更新日志](changelog.md)
 
