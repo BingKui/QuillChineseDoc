@@ -18,13 +18,14 @@
   * 模块（Modules）
   * 主题（Themes）
 * [指南（Guides）](zhi-nan-ff08-guides.md)
-  * 为什么要用Quill？（Why Quill）
+  * [为什么要用Quill？（Why Quill）](guides/wei-shi-yao-yao-yong-quill-why-quill.md)
   * [怎么自定义Quill](guides/howtocustomizequill.md)
-  * 将Quill添加到你的构建系统
-  * 构建自定义模块
+  * [将Quill添加到你的构建系统](guides/jiang-quill-tian-jia-dao-ni-de-gou-jian-xi-tong.md)
+  * [构建自定义模块](guides/gou-jian-zi-ding-yi-mo-kuai.md)
   * [通过Parchment克隆Medium](guides/clonewithparchment.md)
   * [设计Delta的格式](guides/she-ji-delta-de-ge-shi.md)
-  * 与其他富文本编辑器对比
-  * 升级到1.0
-* 其他相关库（Other）
+  * [与其他富文本编辑器对比](guides/yu-qi-ta-fu-wen-ben-bian-ji-qi-dui-bi.md)
+  * [升级到1.0](guides/sheng-ji-dao-1-0.md)
+* [其他相关库（Other）](qi-ta-xiang-guan-ku-ff08-other.md)
+  * [Parchment](other/parchment.md)
 
