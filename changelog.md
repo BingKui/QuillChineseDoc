@@ -27,4 +27,11 @@
 * 完成history module
 * 完成toolbar module部分翻译
 
+## 2018-01-12
+
+* 完成toolbar module剩余翻译
+* 完成download
+* 修改问嘟囔目录下自动生成文件名称，重新更新菜单链接
+* 新建modules.md
+* 完成配置项configuration
 
