@@ -135,3 +135,6 @@ quill.removeFormat(3, 7);
 //   { insert: '\n', { align: 'center' } }
 // ]
 ```
+
+
+
