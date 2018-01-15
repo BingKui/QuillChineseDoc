@@ -35,3 +35,7 @@
 * 新建modules.md
 * 完成配置项configuration
 
+## 2018-01-15
+
+* 完成formats
+

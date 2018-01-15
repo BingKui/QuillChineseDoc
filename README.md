@@ -10,7 +10,7 @@ Quill是一个所见即所得的富文本编辑器，拥有很好的交互体验
 
 快速链接：
 
-[快速开始](./documentation/quickstarts)
+[快速开始](documentation/quickstart.md)
 
 翻译版本： v1.3.4
 
