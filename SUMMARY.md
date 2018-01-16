@@ -32,7 +32,7 @@
   * [设计Delta的格式](guides/she-ji-delta-de-ge-shi.md)
   * [与其他富文本编辑器对比](guides/yu-qi-ta-fu-wen-ben-bian-ji-qi-dui-bi.md)
   * [升级到1.0](guides/sheng-ji-dao-1-0.md)
-* [其他相关库（Other）](qi-ta-xiang-guan-ku-ff08-other.md)
+* [其他相关库（Other）](other.md)
   * [Parchment](other/parchment.md)
 * [更新日志](changelog.md)
 
