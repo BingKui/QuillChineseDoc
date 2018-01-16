@@ -173,3 +173,6 @@ quill.updateContents(new Delta()
 //  { insert: '!', attributes: { bold: true} }
 // ]
 ```
+
+
+
