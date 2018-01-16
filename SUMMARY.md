@@ -1,7 +1,7 @@
 # Summary
 
 * [简介](README.md)
-* [文档（Document）](wen-dang-ff08-document.md)
+* [文档（Document）](document.md)
   * [快速开始（QuickStart）](documentation/quickstart.md)
   * [下载（Download）](documentation/download.md)
   * [配置项（Configuration）](documentation/configuration.md)
@@ -23,10 +23,10 @@
     * [格式化（Formula）](documentation/modules/formula.md)
     * [语法高亮（Syntax Highlighter）](documentation/modules/syntaxhighlighter.md)
   * [主题（Themes）](documentation/themes.md)
-* [指南（Guides）](zhi-nan-ff08-guides.md)
-  * [为什么要用Quill？（Why Quill）](guides/wei-shi-yao-yao-yong-quill-why-quill.md)
+* [指南（Guides）](guides.md)
+  * [为什么要用Quill？（Why Quill）](guides/whyquill.md)
   * [怎么自定义Quill](guides/howtocustomizequill.md)
-  * [将Quill添加到你的构建系统](guides/jiang-quill-tian-jia-dao-ni-de-gou-jian-xi-tong.md)
+  * [将Quill添加到你的构建系统](guides/addtobuildsys.md)
   * [构建自定义模块](guides/gou-jian-zi-ding-yi-mo-kuai.md)
   * [通过Parchment克隆Medium](guides/clonewithparchment.md)
   * [设计Delta的格式](guides/she-ji-delta-de-ge-shi.md)

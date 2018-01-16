@@ -39,6 +39,104 @@ var quill = new Quill('#editor', {
 });
 ```
 
-一些模块，例如：[Clipboard]()、[Keyboard]()和[History]()，需要被作为核心功能包含，这取决于他们提供的APIs。例如，即使撤销额重做是基本、预期的编辑器功能，但是浏览器的默认行为是不符并且不可预期的。
+一些模块，例如：[Clipboard]()、[Keyboard]()和[History]()，需要被作为核心功能包含，这取决于他们提供的APIs。例如，即使撤销额重做是基本、预期的编辑器功能，但是浏览器的默认行为是不符并且不可预期的。History模块通过自己实现的撤销管理器并将`undo()`和`redo()`暴露为API来填补这个空白。
 
+尽管如此，坚持使用Quill模块化设计，仍然可以通过实现自己的撤销管理器来取代历史模块，从而彻底改变撤销和重做的方式，或者其他核心功能。只要你实现相同的API接口，Quill会很乐意使用你替换的模块。通过继承现有的模块，并覆盖你想要改变的地方，这就很容易完成。看看模块文档中的覆盖核心[剪贴板模块]()的一个非常简单的例子。
 
+最终，你可能需要添加现有模块未能提供的功能。在这种情况下，将其组织成为一个Quill模块可能会很方便，[自定义模块]()包含了这些内容。当然，在应用程序代码中将逻辑从Quill中分离出来肯定是有效的。
+
+## 内容和格式
+
+Quill允许通过其文档模型Parchment修改和扩展它能够了解的内容和格式。内容和格式在Parchment中表示为Blots或者Attributors，大致对应DOM中的节点和属性。
+
+### 类名（Class） 与 行样式（Inline）的比较
+
+在尽可能的情况下，Quill使用类而不是使用内联样式属性，但两者都可以实现，你可自行选择。下面是一个实例的片段。
+
+```
+var ColorClass = Quill.import('attributors/class/color');
+var SizeStyle = Quill.import('attributors/style/size');
+Quill.register(ColorClass, true);
+Quill.register(SizeStyle, true);
+
+// 像普通方式一样初始化
+var quill = new Quill('#editor', {
+  modules: {
+    toolbar: true
+  },
+  theme: 'snow'
+});
+```
+
+### 自定义属相（Customizing Attributors）
+
+除了选择特定的属性外，你也可以定制现有的。以下是字体白名单添加附加字体的示例。
+
+```
+var FontAttributor = Quill.import('attributors/class/font');
+FontAttributor.whitelist = [
+  'sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'
+];
+Quill.register(FontAttributor, true);
+```
+
+注意，你仍然需要将这些类的样式添加到css文件中。
+
+```
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<style>
+.ql-font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+</style>
+```
+
+### 自定义Blots
+
+由Blots代表的格式也可以定制。以下是如何更改用于表示粗体格式的DOM节点。
+
+```
+var Bold = Quill.import('formats/bold');
+Bold.tagName = 'B';   // Quill uses <strong> by default
+Quill.register(Bold, true);
+
+// 正常初始化
+var quill = new Quill('#editor', {
+  modules: {
+    toolbar: true
+  },
+  theme: 'snow'
+});
+```
+
+### 扩展Blots
+
+你也可以扩展现有的格式。下边是一个不允许格式化其内容的列表项的ES6实现。代码块正是以这种方式实现的。
+
+```
+var ListItem = Quill.import('formats/list/item');
+
+class PlainListItem extends ListItem {
+  formatAt(index, length, name, value) {
+    if (name === 'list') {
+      // Allow changing or removing list format
+      super.formatAt(name, value);
+    }
+    // Otherwise ignore
+  }
+}
+
+Quill.register(PlainListItem, true);
+
+// 正常初始化
+var quill = new Quill('#editor', {
+  modules: {
+    toolbar: true
+  },
+  theme: 'snow'
+});
+```
+
+你可以通过调用`console.log(Quill.imports)`查询可用的Blots和Attributors列表。不支持直接修改这个对象。使用`Quill.register`代替。
+
+有关Parchment、Blots和Attributors的完整参考资料可以在Parchment自己的文档中找到。要深入的了解，请查阅[通过Parchment克隆Medium]()，该文档从Quill了解纯文本开始，添加所有格式的支持。大多数情况下，由于绝大多数已经在Quill中实现，所以不需要从头开始构建格式，但是了解Quill的工作原理仍然很有用。
