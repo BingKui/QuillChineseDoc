@@ -140,5 +140,130 @@ DividerBlot.tagName = 'hr';
 
 ## 图片
 
+通过学习构建Link和Divider Blot我们知道图片（Image）也能够被添加。我们将使用一个对象来表示如何支持。我们的按钮处理程序插入图像将使用静态值，因此我们不会分心关注与Parchment无关的UI tooltip代码，这是本指南的重点。
 
+```
+let BlockEmbed = Quill.import('blots/block/embed');
 
+class ImageBlot extends BlockEmbed {
+  static create(value) {
+    let node = super.create();
+    node.setAttribute('alt', value.alt);
+    node.setAttribute('src', value.url);
+    return node;
+  }
+
+  static value(node) {
+    return {
+      alt: node.getAttribute('alt'),
+      url: node.getAttribute('src')
+    };
+  }
+}
+ImageBlot.blotName = 'image';
+ImageBlot.tagName = 'img';
+```
+
+## 视频
+
+我们会以实现图片的类似方式实现添加视频。我们可以使用HTML5的`<video>`标签，但是这种方式无法播放YouTube视频，因为这可能是常见和普遍的场景，因此我们会使用`<iframe>`来实现它。我们不关心这个，但是如果你想要让多个Blot使用相同的标签，除了`tagName`之外，还可以使用`className`，在下一个Tweet的示例中演示。
+
+此外，我们将添加对高度和宽度的支持，作为未被注册的格式。只要与注册格式不存在命名空间冲突，一些特定的Embeds格式不必单独注册。这是因为，Blots传递未知格式到它的子节点，最终到达所有叶子节点。这也允许不同的Embeds已不同的方式处理未注册的格式。例如：我们之前嵌入的图片可能已经识别并处理了`width`格式，但是这与我们的视频不同。
+
+```
+class VideoBlot extends BlockEmbed {
+  static create(url) {
+    let node = super.create();
+
+    // Set non-format related attributes with static values
+    node.setAttribute('frameborder', '0');
+    node.setAttribute('allowfullscreen', true);
+
+    return node;
+  }
+
+  static formats(node) {
+    // We still need to report unregistered embed formats
+    let format = {};
+    if (node.hasAttribute('height')) {
+      format.height = node.getAttribute('height');
+    }
+    if (node.hasAttribute('width')) {
+      format.width = node.getAttribute('width');
+    }
+    return format;
+  }
+
+  static value(node) {
+    return node.getAttribute('src');
+  }
+
+  format(name, value) {
+    // Handle unregistered embed formats
+    if (name === 'height' || name === 'width') {
+      if (value) {
+        this.domNode.setAttribute(name, value);
+      } else {
+        this.domNode.removeAttribute(name, value);
+      }
+    } else {
+      super.format(name, value);
+    }
+  }
+}
+VideoBlot.blotName = 'video';
+VideoBlot.tagName = 'iframe';
+```
+
+注意：如果你打开你的控制台并且输入`getContents`，Quill会返回video已以下格式：
+
+```
+{
+  ops: [{
+    insert: {
+      video: {
+        src: 'https://www.youtube.com/embed/QHH3iSeDBLo?showinfo=0'
+      }
+    },
+    attributes: {
+      height: '170',
+      width: '400'
+    }
+  }]
+}
+```
+
+## 推特（Tweets）
+
+Medium 支持许多嵌入式类型，但是这个指南只关注Tweets。Tweet Blot的实现与图片几乎一样。我们利用Embed Blot不必对应void 节点的事实。它可以是任意节点，Quill将它视为一个无效节点，不会遍历其子节点或后代。这使我们可以使用`<div>`和本地的Twitter JavaScript库在我们指定的div容器中执行所需的操作。
+
+由于我们的根节点已使用了一个`<div>`，我们需要指定一个className来消除歧义。注意：内联样式Blot使用`<span>`，块Blot使用`<p>`，因此，如果你想使用这些标签用于自定义Blot，则必须指定一个除了`tagName`外的`className`。
+
+我们使用Tweet Id作为定义我们的Blot值。再次，我们的点击处理函数使用静态值，已避免从不相关的UI代码分心。
+
+```
+class TweetBlot extends BlockEmbed {
+  static create(id) {
+    let node = super.create();
+    node.dataset.id = id;
+    // Allow twitter library to modify our contents
+    twttr.widgets.createTweet(id, node);
+    return node;
+  }
+
+  static value(domNode) {
+    return domNode.dataset.id;
+  }
+}
+TweetBlot.blotName = 'tweet';
+TweetBlot.tagName = 'div';
+TweetBlot.className = 'tweet';
+```
+
+## 成品
+
+我们开始只是一个一堆按钮和一个刚刚理解明文的Quill核心。通过Parchment，我们可以添加粗体、斜体、链接、块引用、标题、部分分割线、图片、视频甚至是Tweets。所有这些都在保持可预测和一致的文档的同时，使我们能够使用Quill强大的API来处理这些新的格式和内容。
+
+最后，让我们添加一些Polish完成我们的演示。它不会是Medium 的界面，我们尽量接近。
+
+[演示地址](https://codepen.io/quill/pen/qNJrYB)
