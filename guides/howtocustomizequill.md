@@ -16,7 +16,7 @@ Quill官方提供了一个标准的工具栏主题Snow和一个提示工具主�
 
 如果你想大量的修改用户界面，你可以通过忽略theme的配置项来获得一个完全无样式的Quill编辑器。在这种情况下，你仍然需要一个包含基础样式的最小样式文件，来确保所有浏览器的对于空格有统一的呈现以及有序列表存在适当的编号。
 
-```
+```html
 <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.4/quill.core.css">
 ```
 
@@ -30,7 +30,7 @@ Quill采用小型编辑器核心组成的模块化架构设计，其中包含增
 
 除此之外，如果你想大量的改变现有模块已经实现的功能，你可以包含它，或者当一个主题默认包含它时明确的排除它，然后使用和默认模块相同的API来实现你自己的额外功能。
 
-```
+```javascript
 var quill = new Quill('#editor', {
   modules: {
     toolbar: false    // Snow includes toolbar by default
@@ -53,7 +53,7 @@ Quill允许通过其文档模型Parchment修改和扩展它能够了解的内容
 
 在尽可能的情况下，Quill使用类而不是使用内联样式属性，但两者都可以实现，你可自行选择。下面是一个实例的片段。
 
-```
+```javascript
 var ColorClass = Quill.import('attributors/class/color');
 var SizeStyle = Quill.import('attributors/style/size');
 Quill.register(ColorClass, true);
@@ -72,7 +72,7 @@ var quill = new Quill('#editor', {
 
 除了选择特定的属性外，你也可以定制现有的。以下是字体白名单添加附加字体的示例。
 
-```
+```javascript
 var FontAttributor = Quill.import('attributors/class/font');
 FontAttributor.whitelist = [
   'sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'
@@ -82,7 +82,7 @@ Quill.register(FontAttributor, true);
 
 注意，你仍然需要将这些类的样式添加到css文件中。
 
-```
+```html
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <style>
 .ql-font-roboto {
@@ -95,7 +95,7 @@ Quill.register(FontAttributor, true);
 
 由Blots代表的格式也可以定制。以下是如何更改用于表示粗体格式的DOM节点。
 
-```
+```javascript
 var Bold = Quill.import('formats/bold');
 Bold.tagName = 'B';   // Quill uses <strong> by default
 Quill.register(Bold, true);
@@ -113,7 +113,7 @@ var quill = new Quill('#editor', {
 
 你也可以扩展现有的格式。下边是一个不允许格式化其内容的列表项的ES6实现。代码块正是以这种方式实现的。
 
-```
+```javascript
 var ListItem = Quill.import('formats/list/item');
 
 class PlainListItem extends ListItem {

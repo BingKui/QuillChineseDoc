@@ -26,7 +26,7 @@
 
 为了实现粗体和斜体，我们只需要从Inline继承，然后设置`blotName`和`tagName`，并注册到Quill上就可以了。有关继承和静态方法和变量的签名的参考，请查阅[Parchment](../other/parchment.md)
 
-```
+```javascript
 let Inline = Quill.import('blots/inline');
 
 class BoldBlot extends Inline { }
@@ -43,7 +43,7 @@ Quill.register(ItalicBlot);
 
 我们遵循Medium的例子，在这里使用了`strong`和`em`便签，但是你也可以用`b`和`i`标签。Blot的名称会被用作Quill格式的名称。通过注册我们的Blot，现在我们可以在我们的新格式上使用Quill完整的API。
 
-```
+```javascript
 Quill.register(BoldBlot);
 Quill.register(ItalicBlot);
 
@@ -65,7 +65,7 @@ quill.formatText(0, 4, 'italic', true);
 
 链接稍微复杂一些，因为我们需要更多的布尔值来存储链接的URL。这会以两种方式影响我们的链接Blot：创建和格式检索。我们将url表示成为一个字符串值，但是我们可以通过其他方式轻松实现，例如一个带有url属性的对象，允许设置其他key/value对并定义一个链接。我们稍后将用images来演示这一点。
 
-```
+```javascript
 class LinkBlot extends Inline {
   static create(value) {
     let node = super.create();
@@ -96,7 +96,7 @@ Quill.register(LinkBlot);
 
 段落的执行方式与粗体相同，只不过我们将从块继承基本块级别Blot。虽然Inline Blots能够嵌套，但是Block Blots不能。当应用相同的文本范围时，Block Blots不会被另一个替代。
 
-```
+```javascript
 let Block = Quill.import('blots/block');
 
 class BlockquoteBlot extends Block { }
@@ -106,7 +106,7 @@ BlockquoteBlot.tagName = 'blockquote';
 
 标题的实现方式完全一样，只有一个区别：它能够由多个DOM元素表示。格式的默认值变成tagName而不是true。我们可以通过`formats()`来进行定制，就像我们为links做的一样。
 
-```
+```javascript
 class HeaderBlot extends Block {
   static formats(node) {
     return HeaderBlot.tagName.indexOf(node.tagName) + 1;
@@ -128,7 +128,7 @@ HeaderBlot.tagName = ['H1', 'H2'];
 
 我们的方法与之前的类似，只不过我们从BlockEmbed继承而来。Embed也存在于`blots/embed`下，但是它是内联级别的Blots。我们希望通过块级别实现代替分隔符。
 
-```
+```javascript
 let BlockEmbed = Quill.import('blots/block/embed');
 
 class DividerBlot extends BlockEmbed { }
@@ -142,7 +142,7 @@ DividerBlot.tagName = 'hr';
 
 通过学习构建Link和Divider Blot我们知道图片（Image）也能够被添加。我们将使用一个对象来表示如何支持。我们的按钮处理程序插入图像将使用静态值，因此我们不会分心关注与Parchment无关的UI tooltip代码，这是本指南的重点。
 
-```
+```javascript
 let BlockEmbed = Quill.import('blots/block/embed');
 
 class ImageBlot extends BlockEmbed {
@@ -170,7 +170,7 @@ ImageBlot.tagName = 'img';
 
 此外，我们将添加对高度和宽度的支持，作为未被注册的格式。只要与注册格式不存在命名空间冲突，一些特定的Embeds格式不必单独注册。这是因为，Blots传递未知格式到它的子节点，最终到达所有叶子节点。这也允许不同的Embeds已不同的方式处理未注册的格式。例如：我们之前嵌入的图片可能已经识别并处理了`width`格式，但是这与我们的视频不同。
 
-```
+```javascript
 class VideoBlot extends BlockEmbed {
   static create(url) {
     let node = super.create();
@@ -217,7 +217,7 @@ VideoBlot.tagName = 'iframe';
 
 注意：如果你打开你的控制台并且输入`getContents`，Quill会返回video已以下格式：
 
-```
+```javascript
 {
   ops: [{
     insert: {
@@ -241,7 +241,7 @@ Medium 支持许多嵌入式类型，但是这个指南只关注Tweets。Tweet B
 
 我们使用Tweet Id作为定义我们的Blot值。再次，我们的点击处理函数使用静态值，已避免从不相关的UI代码分心。
 
-```
+```javascript
 class TweetBlot extends BlockEmbed {
   static create(id) {
     let node = super.create();

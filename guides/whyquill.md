@@ -26,7 +26,7 @@ Quill公开了它自己的文档模型，这是对DOM的一个强大的抽象，
 
 所有的好处都来自于一个易于使用的包。Quill拥有合适的默认值，你能够通过几行JavaScript代码就能使用它。
 
-```
+```javascript
 var quill = new Quill('#editor', {
   modules: { toolbar: true },
   theme: 'snow'

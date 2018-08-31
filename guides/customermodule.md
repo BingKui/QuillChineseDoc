@@ -16,14 +16,14 @@ Quill作为编辑器的核心优势在于其丰富的API和强大的自定义功
 
 **html代码**
 
-```
+```html
 <div id="editor"></div>
 <div id="counter">0</div>
 ```
 
 **css代码**
 
-```
+```css
 body {
   padding: 25px;
 }
@@ -43,7 +43,7 @@ body {
 
 **js代码**
 
-```
+```javascript
 // Implement and register module
 Quill.register('modules/counter', function(quill, options) {
   var container = document.querySelector('#counter');
@@ -75,14 +75,14 @@ var quill = new Quill('#editor', {
 
 **html代码**
 
-```
+```html
 <div id="editor"></div>
 <div id="counter">0 words</div>
 ```
 
 **css代码**
 
-```
+```css
 body {
   padding: 25px;
 }
@@ -102,7 +102,7 @@ body {
 
 **js代码**
 
-```
+```javascript
 Quill.register('modules/counter', function(quill, options) {
   var container = document.querySelector(options.container);
   quill.on('text-change', function() {
@@ -135,14 +135,14 @@ var quill = new Quill('#editor', {
 
 **html代码**
 
-```
+```html
 <div id="editor"></div>
 <div id="counter">0 words</div>
 ```
 
 **css代码**
 
-```
+```css
 body {
   padding: 25px;
 }
@@ -162,7 +162,7 @@ body {
 
 **js代码**
 
-```
+```javascript
 var Counter = function(quill, options) {
   this.quill = quill;
   this.options = options;
@@ -210,14 +210,14 @@ console.log(counter.calculate(), 'words');
 
 **html代码**
 
-```
+```html
 <div id="editor"></div>
 <div id="counter"></div>
 ```
 
 **css代码**
 
-```
+```css
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -239,7 +239,7 @@ body {
 
 **js代码（Babel）**
 
-```
+```javascript
 class Counter {
   constructor(quill, options) {
     this.quill = quill;
